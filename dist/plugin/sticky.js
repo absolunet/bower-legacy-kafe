@@ -1,4 +1,4 @@
-(function(global, undefined) { var kafe = global.kafe, $ = kafe.dependencies.jQuery; kafe.bonify({name:'plugin.sticky', version:'0.1.0', obj:(function(){
+(function(global, undefined) { var kafe = global.kafe, $ = kafe.dependencies.jQuery; kafe.bonify({name:'plugin.sticky', version:'0.1.1', obj:(function(){
 
 	var
 		$window   = $(global),
@@ -8,7 +8,7 @@
 
 
 	/**
-	* ### Version 0.1.0
+	* ### Version 0.1.1
 	* Sticky box
 	*
 	* @module kafe.plugin
@@ -92,7 +92,7 @@
 
 					// if is about to stick
 					//---------------------------
-					if (position >= tippingTop && (!contain || position <= tippingBottom)) {
+					if (position !== 0 && position >= tippingTop && (!contain || position <= tippingBottom)) {
 
 						// calculate offset left
 						var attrT = { position: 'absolute' };
@@ -122,7 +122,7 @@
 
 					// if is about to unstick from top
 					//---------------------------
-					} else if (position < tippingTop) {
+					} else if (position === 0 || position < tippingTop) {
 
 						// unstick it
 						attr = {
