@@ -4,13 +4,13 @@
 	</a>
 </p>
 
-# kafe 3.0.0
+# kafe ![Bower version][bower-image] 
 #### Mixing javascript crops for a perfect flavour.
 > /kæfˈeɪ/ (haitian creole) A beverage made by infusing the beans of the coffee plant in hot water.
 
 ## Installation
 ```bash
-bower install kafe --config.directory=./dependencies/bower
+bower install kafe
 ```
 
 ## Dependencies
@@ -53,3 +53,6 @@ See the [CHANGELOG](https://github.com/absolunet/kafe/tree/master/CHANGELOG.md).
 
 ## License 
 See the [LICENSE](https://github.com/absolunet/kafe/tree/master/LICENSE.md).
+
+
+[bower-image]: http://img.shields.io/bower/v/kafe.svg?style=flat
