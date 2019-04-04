@@ -1,4 +1,4 @@
-(function(global, undefined) { var kafe = global.kafe, $ = kafe.dependencies.jQuery; kafe.bonify({name:'plugin.sticky', version:'0.1.1', obj:(function(){
+(function(global, undefined) { var kafe = global.kafe, $ = kafe.dependencies.jQuery; kafe.bonify({name:'plugin.sticky', version:'0.1.2', obj:(function(){
 
 	var
 		$window   = $(global),
@@ -8,7 +8,7 @@
 
 
 	/**
-	* ### Version 0.1.1
+	* ### Version 0.1.2
 	* Sticky box
 	*
 	* @module kafe.plugin
@@ -26,6 +26,7 @@
 	*	@param {String} [options.align='left'] Specify `right` if your horizontal absolute positioning uses right instead of left.
 	*	@param {Boolean} [options.contains=false] If true, the sticky will become scrollable when it reaches the bottom edge of its container.
 	*	@param {String|jQueryObject|DOMElement} [options.container=PARENT] Container in which to constrain the sticky.
+	*	@param {Number} [options.topBuffer=0] Buffer in pixels before sticking occurs.
 	*
 	* @example
 	*	kafe.plugin.sticky.init({ selector: '#post-it' })
@@ -48,6 +49,7 @@
 
 				// original position
 				topOffset     = null,
+				topBuffer     = (options.topBuffer) ? options.topBuffer : 0,
 				originalTop   = parseInt($e.css('top').toString().substr(0, $e.css('top').length-2),10),
 				originalHori  = $e.css(align),
 				topMargin     = originalTop,
@@ -73,7 +75,7 @@
 					// current position
 					var
 						position      = $window.scrollTop(),
-						tippingTop    = topOffset - topMargin,
+						tippingTop    = topOffset - topMargin + topBuffer,
 						tippingBottom = tippingTop + ($container.outerHeight() - $e.outerHeight() - (originalTop*2)),
 						attr          = {}
 					;
@@ -121,6 +123,7 @@
 						// apply
 						$e.css(attr);
 						$container.addClass('kafesticky-sticking');
+						$e.trigger('kafesticky-binding');
 						sticking = true;
 						fromBottom = false;
 
@@ -139,6 +142,7 @@
 						// apply
 						$e.css(attr);
 						$container.removeClass('kafesticky-sticking');
+						$e.trigger('kafesticky-unbinding');
 						sticking   = false;
 						fromBottom = false;
 
